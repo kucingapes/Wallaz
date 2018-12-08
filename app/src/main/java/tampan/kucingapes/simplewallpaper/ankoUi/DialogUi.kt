@@ -42,6 +42,7 @@ class DialogUi : AnkoComponent<BottomSheetDialog> {
                             id = R.id.author_insta
                             padding = dip(8)
                             gravity = Gravity.CENTER_VERTICAL
+                            Utils.ripple(this)
                             imageView {
                                 setImageResource(R.drawable.ic_social_insta)
                             }.lparams(dip(22), dip(22))

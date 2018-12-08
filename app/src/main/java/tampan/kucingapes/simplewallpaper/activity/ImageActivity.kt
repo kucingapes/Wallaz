@@ -132,6 +132,10 @@ class ImageActivity : BaseActivity(), AnDrawerClickListener, ISingleView, IDownl
             userInsta.visibility = View.GONE
         }
 
+        userInsta.setOnClickListener {
+            browse("https://instagram.com/${unsplash.user?.instagramUsername}")
+        }
+
         colorDot.setCardBackgroundColor(Color.parseColor(unsplash.color as String))
         colorText.text = unsplash.color
 

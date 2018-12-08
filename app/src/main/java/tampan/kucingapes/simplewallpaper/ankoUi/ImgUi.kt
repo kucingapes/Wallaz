@@ -56,6 +56,7 @@ class ImgUi : AnkoComponent<AppCompatActivity> {
 
                     floatingActionButton {
                         id = R.id.fab_menu
+                        imageResource = R.drawable.ic_menu_up
                     }.lparams {
                         margin = dip(12)
                     }

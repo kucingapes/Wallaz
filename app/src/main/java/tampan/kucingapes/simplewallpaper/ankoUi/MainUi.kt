@@ -24,6 +24,7 @@ class MainUi : AnkoComponent<ViewGroup> {
 
             floatingActionButton {
                 id = R.id.fab_up
+                imageResource = R.drawable.ic_up
             }.lparams {
                 gravity = Gravity.END or Gravity.BOTTOM
                 margin = dip(12)
