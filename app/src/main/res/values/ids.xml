@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="toolbar" type="id" />
+    <item name="recycler_view" type="id" />
+    <item name="img_main" type="id"/>
+    <item name="fab_menu" type="id"/>
+    <item name="photo_view" type="id"/>
+    <item name="img_view" type="id"/>
+    <item name="fab_hq" type="id" />
+    <item name="author_name" type="id" />
+    <item name="author_img" type="id" />
+    <item name="list_download" type="id" />
+    <item name="fab_up" type="id"/>
+    <item name="app_bar" type="id"/>
+    <item name="bottom_ui" type="id"/>
+    <item name="fab_setup" type="id"/>
+    <item name="set_wallpaper" type="id"/>
+    <item name="medium_img" type="id" />
+    <item name="medium_download" type="id" />
+    <item name="download_badge" type="id" />
+    <item name="download_text" type="id" />
+    <item name="list_download_col1" type="id" />
+    <item name="list_download_col2" type="id" />
+    <item name="author_insta" type="id" />
+    <item name="aspec_ratio" type="id" />
+    <item name="aspec_ratio_text" type="id" />
+    <item name="author_insta_text" type="id" />
+    <item name="color_accent" type="id" />
+    <item name="color_accent_text" type="id" />
+    <item name="snackbar_layout" type="id" />
+    <item name="status" type="id" />
+    <item name="sum_wallpaper" type="id" />
+    <item name="spinner_interval" type="id" />
+    <item name="switcher" type="id" />
+    <item name="collection_name" type="id" />
+    <item name="collection_size" type="id" />
+    <item name="main_ui" type="id" />
+    <item name="error_text" type="id" />
+    <item name="swipe_refresh" type="id" />
+    <item name="share_on" type="id" />
+    <item name="copy_url" type="id" />
+    <item name="layout_type" type="id" />
+    <item name="open_folder" type="id" />
+</resources>
