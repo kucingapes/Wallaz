@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Wallaz</string>
+    <string name="path_changer">.wallaz/auto</string>
 </resources>

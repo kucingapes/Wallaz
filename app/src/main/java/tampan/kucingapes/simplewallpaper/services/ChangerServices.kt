@@ -8,12 +8,13 @@ import android.graphics.BitmapFactory
 import android.os.Environment
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
+import tampan.kucingapes.simplewallpaper.R
 import java.io.File
 import java.util.*
 
 class ChangerServices : BroadcastReceiver(), AnkoLogger {
     override fun onReceive(context: Context?, intent: Intent?) {
-        val path = File(Environment.getExternalStorageDirectory(), ".wallaz/auto")
+        val path = File(Environment.getExternalStorageDirectory(), context?.getString(R.string.path_changer))
         val files = path.listFiles()
         val random = Random()
 

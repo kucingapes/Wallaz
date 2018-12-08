@@ -92,7 +92,7 @@ class MainActivity : BaseActivity(), AnDrawerClickListener {
     }
 
     private fun setupFolder() {
-        val path = File(Environment.getExternalStorageDirectory(), ".wallaz/auto")
+        val path = File(Environment.getExternalStorageDirectory(), getString(R.string.path_changer))
         if (!path.exists()) {
             path.mkdirs()
         }

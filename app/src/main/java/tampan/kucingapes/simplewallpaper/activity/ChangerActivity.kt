@@ -49,7 +49,7 @@ class ChangerActivity : BaseActivity() {
         savedLong = sharedPreferences.getLong("interval", 0)
         selectedPosition = sharedPreferences.getInt("positionSpinner", 0)
 
-        val path = "${Environment.getExternalStorageDirectory().absolutePath}/.wallaz/auto"
+        val path = "${Environment.getExternalStorageDirectory().absolutePath}/${getString(R.string.path_changer)}"
         val folder = File(path)
 
         val files = folder.listFiles()
