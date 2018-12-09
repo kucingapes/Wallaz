@@ -75,7 +75,7 @@ class ChangerActivity : BaseActivity() {
 
         switcher.isChecked = savedLong != 0L
 
-        switcher.setOnCheckedChangeListener { buttonView, isChecked ->
+        switcher.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 ChangerHelper.startServiceChanger(this, spinnerValue.interval.toLong())
                 sharedPreferences.edit().apply {
@@ -92,10 +92,6 @@ class ChangerActivity : BaseActivity() {
     }
 
     private fun initImg(files: Array<File>) {
-        /*val uri = UriProvider.getFileUri(this, files[0])
-
-        val img = find(R.id.img_view) as ImageView
-        Picasso.get().load(uri).into(img)*/
 
         val listImage: MutableList<File> = mutableListOf()
         listImage.addAll(files)
@@ -124,8 +120,6 @@ class ChangerActivity : BaseActivity() {
         val oneDay = 24 * oneHour
 
         val intervals: MutableList<SpinnerWithInt> = mutableListOf()
-        intervals.add(SpinnerWithInt("3 detik", 3000))
-        intervals.add(SpinnerWithInt("5 detik", 5000))
         intervals.add(SpinnerWithInt("5 minute", 5 * minute))
         intervals.add(SpinnerWithInt("1 hour", oneHour))
         intervals.add(SpinnerWithInt("3 hour", 3 * oneHour))

@@ -5,6 +5,7 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.support.design.widget.*
 import android.support.v7.widget.CardView
@@ -19,6 +20,8 @@ import android.widget.TextView
 import com.androidnetworking.error.ANError
 import com.github.chrisbanes.photoview.PhotoView
 import com.kucingapes.ankodrawer.AnDrawerClickListener
+import com.squareup.picasso.Callback
+import com.squareup.picasso.NetworkPolicy
 import com.squareup.picasso.Picasso
 import jp.wasabeef.picasso.transformations.CropCircleTransformation
 import org.jetbrains.anko.*
@@ -38,6 +41,7 @@ import tampan.kucingapes.simplewallpaper.model.photos.Unsplash
 import tampan.kucingapes.simplewallpaper.model.download.DownldModel
 import tampan.kucingapes.simplewallpaper.presenter.ImagePresenter
 import tampan.kucingapes.simplewallpaper.presenter.SinglePresenter
+import java.lang.Exception
 
 class ImageActivity : BaseActivity(), AnDrawerClickListener, ISingleView, IDownloadClickListener, IImageView {
 
@@ -60,9 +64,11 @@ class ImageActivity : BaseActivity(), AnDrawerClickListener, ISingleView, IDownl
         super.onCreate(savedInstanceState)
         ImgUi().setContentView(this)
 
+        supportPostponeEnterTransition()
+
         bindId()
-        initAppBar()
         initPresenter()
+        initAppBar()
     }
 
     private fun initAppBar() {
@@ -93,8 +99,20 @@ class ImageActivity : BaseActivity(), AnDrawerClickListener, ISingleView, IDownl
         supportActionBar?.title = "Photo by ${unsplash.user?.firstName}"
 
         Picasso.get()
-                .load(unsplash.urls?.small)
-                .into(photoView)
+            .load(unsplash.urls?.small)
+            .networkPolicy(NetworkPolicy.OFFLINE)
+            .into(photoView, object : Callback {
+                override fun onSuccess() {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        startPostponedEnterTransition()
+                    }
+                }
+
+                override fun onError(e: Exception?) {
+                }
+
+            })
+
 
         fabHq.setOnClickListener {
             Picasso.get().load(unsplash.urls?.regular).into(photoView)
@@ -124,9 +142,9 @@ class ImageActivity : BaseActivity(), AnDrawerClickListener, ISingleView, IDownl
         userInstaText.text = unsplash.user?.instagramUsername
         aspecRation.text = "${unsplash.height} x ${unsplash.width}"
         Picasso.get()
-                .load(unsplash.user?.profileImage?.medium)
-                .transform(CropCircleTransformation())
-                .into(userImg)
+            .load(unsplash.user?.profileImage?.medium)
+            .transform(CropCircleTransformation())
+            .into(userImg)
 
         if (userInstaText.text == "null" || userInstaText.text == "") {
             userInsta.visibility = View.GONE
@@ -140,13 +158,41 @@ class ImageActivity : BaseActivity(), AnDrawerClickListener, ISingleView, IDownl
         colorText.text = unsplash.color
 
         val downloadsCol1: MutableList<DownldModel> = mutableListOf()
-        downloadsCol1.add(DownldModel("Medium size", R.drawable.ic_download, unsplash.urls?.regular as String, DownloadTag.MEDIUM))
-        downloadsCol1.add(DownldModel("Full size", R.drawable.ic_download, unsplash.urls.full as String, DownloadTag.FULL))
+        downloadsCol1.add(
+            DownldModel(
+                "Medium size",
+                R.drawable.ic_download,
+                unsplash.urls?.regular as String,
+                DownloadTag.MEDIUM
+            )
+        )
+        downloadsCol1.add(
+            DownldModel(
+                "Full size",
+                R.drawable.ic_download,
+                unsplash.urls.full as String,
+                DownloadTag.FULL
+            )
+        )
         downloadsCol1.add(DownldModel("Raw size", R.drawable.ic_download, unsplash.urls.raw as String, DownloadTag.RAW))
 
         val downloadsCol2: MutableList<DownldModel> = mutableListOf()
-        downloadsCol2.add(DownldModel("Add Live Wallpaper", R.drawable.ic_live_wallpaper, unsplash.urls.regular, DownloadTag.LIVE))
-        downloadsCol2.add(DownldModel("Set As Wallpaper", R.drawable.ic_wallpaper, unsplash.urls.regular, DownloadTag.WALLPAPER))
+        downloadsCol2.add(
+            DownldModel(
+                "Add Live Wallpaper",
+                R.drawable.ic_live_wallpaper,
+                unsplash.urls.regular,
+                DownloadTag.LIVE
+            )
+        )
+        downloadsCol2.add(
+            DownldModel(
+                "Set As Wallpaper",
+                R.drawable.ic_wallpaper,
+                unsplash.urls.regular,
+                DownloadTag.WALLPAPER
+            )
+        )
 
         downloadListCol1.adapter = DownloadListAdapter(downloadsCol1, this)
         downloadListCol2.adapter = DownloadListAdapter(downloadsCol2, this)

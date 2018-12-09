@@ -51,6 +51,7 @@ class MainAdapter(private val list: MutableList<Unsplash>) : RecyclerView.Adapte
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                 context.startActivity(intent, options.toBundle())
             } else context.startActivity<ImageActivity>("id" to unsplash.id)
+
         }
     }
 
